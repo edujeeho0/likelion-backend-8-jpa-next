@@ -43,9 +43,12 @@ public class SchoolController {
         spring = lectureRepository.save(spring);
 
         alex.getAttending().add(jpa);
-        spring.getStudents().add(alex);
-        spring.getStudents().add(brad);
+        alex.getAttending().add(spring);
+//        spring.getStudents().add(alex);
+//        spring.getStudents().add(brad);
+        brad.getAttending().add(spring);
         studentRepository.save(alex);
+        studentRepository.save(brad);
         lectureRepository.save(spring);
         return "done";
     }
