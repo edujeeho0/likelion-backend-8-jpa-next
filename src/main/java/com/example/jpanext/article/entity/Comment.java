@@ -21,5 +21,7 @@ public class Comment extends BaseEntity {
     private String writer;
 
     @ManyToOne
+    // FK의 형태를 설정하고 싶을 때
+    @JoinColumn(name = "article_id")
     private Article article;
 }

@@ -5,14 +5,21 @@ import com.example.jpanext.school.entity.Student;
 import com.example.jpanext.school.repo.LectureRepository;
 import com.example.jpanext.school.repo.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("school")
 @RequiredArgsConstructor
 public class SchoolController {
+//    private static final Logger log
+//            = LoggerFactory.getLogger(SchoolController.class);
+
     private final StudentRepository studentRepository;
     private final LectureRepository lectureRepository;
 
@@ -50,6 +57,21 @@ public class SchoolController {
         studentRepository.save(alex);
         studentRepository.save(brad);
         lectureRepository.save(spring);
+        return "done";
+    }
+
+    @GetMapping("many-to-many-get")
+    public String manyToManyGet() {
+        Student alex = studentRepository.findById(1L)
+                .get();
+        for (Lecture lecture: alex.getAttending()) {
+            log.info("{} listens {}", alex.getFirstName(), lecture.getName());
+        }
+        Lecture spring = lectureRepository.findById(2L)
+                .get();
+        for (Student student: spring.getStudents()) {
+            log.info("{} listens {}", student.getFirstName(), spring.getName());
+        }
         return "done";
     }
 }
