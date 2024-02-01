@@ -23,4 +23,7 @@ public class Student {
 
     @ManyToMany
     private final List<Lecture> attending = new ArrayList<>();
+
+//    @ManyToMany
+//    private final List<Lecture> completed = new ArrayList<>();
 }

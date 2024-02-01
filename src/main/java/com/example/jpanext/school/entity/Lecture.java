@@ -28,4 +28,7 @@ public class Lecture {
 
     @ManyToMany(mappedBy = "attending")
     private final List<Student> students = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "completed")
+//    private final List<Student> completedStudents = new ArrayList<>();
 }
