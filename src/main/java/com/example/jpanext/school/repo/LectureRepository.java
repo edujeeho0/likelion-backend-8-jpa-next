@@ -1,6 +1,5 @@
 package com.example.jpanext.school.repo;
 
-import com.example.jpanext.school.entity.Instructor;
 import com.example.jpanext.school.entity.Lecture;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,7 +54,7 @@ public interface LectureRepository
             Integer endTime
     );
     /**
-     * <code>SELECT * FROM lecture WHERE day in ('mon', 'tue', 'wed')</code>
+     * <code>SELECT * FROM lecture WHERE day IN ('mon', 'tue', 'wed')</code>
      */
     @Query("SELECT l FROM Lecture l WHERE l.day IN :days")
     List<Lecture> findByDayIn(
@@ -107,4 +106,8 @@ public interface LectureRepository
             @Param("instructorId") Long instructorId,
             @Param("day") String day
     );
+
+    // 강의 Lecture와 해당 Lecture를 듣는 학생 수의 리스트
+    @Query("SELECT l, SIZE(l.students) FROM Lecture l")
+    List<Object[]> selectWithStudentCount();
 }
